@@ -1,0 +1,3 @@
+id         Customer Name      Phone   
+go2-Q45g   linh               202222   
+2DG-AOgs   Trang              2123123  

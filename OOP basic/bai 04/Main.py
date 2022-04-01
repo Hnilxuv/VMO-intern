@@ -1,14 +1,11 @@
-from bank_manage import manage_saving_accounts
-from bank_manage import manage_checking_accounts
-from bank_manage import customer_manage
-from bank_manage import  customer
+from bank_manage import manage_saving_accounts, manage_checking_accounts, customer_manage, customer
 
 #khoi tao doi tuong quan ly
-listSA = manage_saving_accounts()
-listCA = manage_checking_accounts()
-listC = customer_manage()
+list_sa = manage_saving_accounts()
+list_ca = manage_checking_accounts()
+list_cus = customer_manage()
 
-while (1 == 1):
+while True:
     print("\nBanking Management")
     print("*************************MENU**************************")
     print("**  1. Add Customer.                                 **")
@@ -16,51 +13,51 @@ while (1 == 1):
     print("**  0. Exit.                                         **")
     key = int(input("Enter choose: "))
 
-    if (key == 1):
+    if key == 1:
         print("\n1. Add Customer.")
-        listC.addCustomer()
+        list_cus.add_customer()
         print("\nDone!")
-    elif(key == 2):
+    elif key == 2:
         print("\n2. Show Customer List.")
-        listC.showCustomerList(listC.getCustomerList())
+        list_cus.show_customer_list(list_cus.get_customer_list())
         id = int(input("Enter id: "))
-        c: customer = listC.findByID(id)
-        if(c != None):
+        c: customer = list_cus.find_by_id(id)
+        if c is not None:
             print("1. Add Saving Account.")
             print("2. Add Checking Account.")
             print("3. Show Account List.")
             print("0. Back")
-            while 1 == 1:
+            while True:
                 key = int(input("Enter choose: "))
                 if key == 1:
                     print("1. Add Saving Account.")
-                    listSA.addSavingAccount(id)
+                    list_sa.add_saving_account(id)
                 elif key == 2:
                     print("2. Add Checking Account.")
-                    listCA.addCheckingAccount(id)
+                    list_ca.add_checking_account(id)
                 elif key == 3:
                     print("3. Show Account List.")
                     print("\n")
-                    sa = len(listSA.findByID(id))
-                    ca = len(listCA.findByID(id))
-                    print("Total number of accounts",ca + sa )
+                    sa = len(list_sa.find_by_id(id))
+                    ca = len(list_ca.find_by_id(id))
+                    print("Total number of accounts", ca + sa)
                     print("1.Saving Account:", sa)
-                    print("2.Checking Account:", ca )
+                    print("2.Checking Account:", ca)
                     print("0. Back")
-                    while 1 == 1:
+                    while True:
                         key = int(input("Enter choose: "))
                         if key == 1:
                             print("1.Saving Account:")
-                            listSA.showSavingAccount(listSA.findByID(id))
+                            list_sa.show_saving_account(list_sa.find_by_id(id))
                         elif key == 2:
                             print("2.Checking Account:")
-                            listCA.showSavingAccount(listCA.findByID(id))
+                            list_ca.show_saving_account(list_ca.find_by_id(id))
                         elif key == 0:
                             print("\nBack")
                             break
                         else:
                             print("\nError choose!")
-                            print("\nAgain Choose")
+                            print("Again choose")
 
                 elif key == 0:
                     print("\nBack")

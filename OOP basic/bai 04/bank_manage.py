@@ -12,126 +12,126 @@ class account_bank(customer):
         self.balance = balance
 
 #lop tai khoan tiet kiem
-class Saving_Account(account_bank):
-    def __init__(self, id, name, account_number, balance, bank_interest_rate, linkcode):
+class saving_account(account_bank):
+    def __init__(self, id, name, account_number, balance, bank_interest_rate, link_code):
         super().__init__(id, name, account_number, balance)
         self.bir = bank_interest_rate
-        self.linkcode = linkcode
+        self.link_code = link_code
 
-    def getAccountNumber(self):
+    def get_account_number(self):
         return self.account_number
 
 #lop tai khoan vang lai
-class Checking_Account(account_bank):
-    def __init__(self,id, name, account_number, balance,  linkcode):
+class checking_account(account_bank):
+    def __init__(self,id, name, account_number, balance,  link_code):
         super().__init__(id, name, account_number, balance)
-        self.linkcode = linkcode
+        self.link_code = link_code
 
-    def getAccountNumber(self):
+    def get_account_number(self):
         return self.account_number
 
 #quan ly khach hang
 class customer_manage:
     #khoi tao danh sach khach hang
-    listCustomer = []
+    list_customer = []
     #khoi tao ma khach hang
-    def generateID(self):
+    def generate_id(self):
         maxId = 1
-        if self.customerQuantity() > 0:
-            maxId = self.listCustomer[0].id
-            for pr in self.listCustomer:
+        if self.customer_quantity() > 0:
+            maxId = self.list_customer[0].id
+            for pr in self.list_customer:
                 if maxId < pr.id:
                     maxId = pr.id
             maxId = maxId + 1
         return maxId
 
-    def customerQuantity(self):
-        return len(self.listCustomer)
+    def customer_quantity(self):
+        return len(self.list_customer)
 
-    def addCustomer(self):
+    def add_customer(self):
         #khoi tao khach hang moi
-        id = self.generateID()
+        id = self.generate_id()
         name = input("Enter customer name: ")
         c = customer(id, name)
-        self.listCustomer.append(c)
+        self.list_customer.append(c)
 
 
-    def showCustomerList(self, listc):
+    def show_customer_list(self, list_c):
         #hien thi danh sach khach hang
         print("{:<10} {:<25}  ".format("ID", "Customer Name" ))
-        for i in listc:
+        for i in list_c:
             print("{:<10} {:<25} ".format(i.id, i.name))
         print("\n")
 
-    def getCustomerList(self):
-        return self.listCustomer
+    def get_customer_list(self):
+        return self.list_customer
 
     #tim khach hang theo ma
-    def findByID(self, id):
+    def find_by_id(self, id):
         rs = None
-        for sa in self.listCustomer:
-            if (sa.id == id):
+        for sa in self.list_customer:
+            if sa.id == id:
                 rs = sa
         return rs
 
 class manage_saving_accounts:
     #khoi tao danh sach tai khoan tiet kiem
-    listSavingAccount = []
+    list_saving_account = []
 
 
-    def addSavingAccount(self, id):
+    def add_saving_account(self, id):
         #tao tai khoan tiet kiem
-        Cid = id
-        nameCustomer = customer_manage().findByID(id).name
-        accountNumber = input("Enter account number: ")
+        customer_id = id
+        name_customer = customer_manage().find_by_id(id).name
+        account_number = input("Enter account number: ")
         balance = int(input("Enter balance : "))
         bank_ir = balance*10/100
-        linkcode = input("Enter account link code: ")
-        sa = Saving_Account(Cid, nameCustomer, accountNumber, balance, bank_ir, linkcode)
-        self.listSavingAccount.append(sa)
+        link_code = input("Enter account link code: ")
+        sa = saving_account(customer_id, name_customer, account_number, balance, bank_ir, link_code)
+        self.list_saving_account.append(sa)
 
     #tim tai khoan tiet kiem theo id khach hang
-    def findByID(self, id):
-        listSA = []
-        for sa in self.listSavingAccount:
+    def find_by_id(self, id):
+        list_sa = []
+        for sa in self.list_saving_account:
             if (sa.id == id):
-                listSA.append(sa)
-        return listSA
+                list_sa.append(sa)
+        return list_sa
     #hien thi danh sach tai khoan tiet kiem
-    def showSavingAccount(self, listSA):
+    def show_saving_account(self, list_sa):
         print("{:<15} {:<20} {:<15} {:<15} {:<15} {:<15}".format("Customer Id", "Name", "Account Number", "Balance", "Bank IR", "Link Code"))
-        for i in listSA:
-            print("{:<15} {:<20} {:<15} {:<15} {:<15} {:<15}".format(i.id, i.name, i.account_number, i.balance, i.bir, i.linkcode))
+        for i in list_sa:
+            print("{:<15} {:<20} {:<15} {:<15} {:<15} {:<15}".format(i.id, i.name, i.account_number, i.balance, i.bir, i.link_code))
         print("\n")
 
-    def getListSA(self):
-        return self.listSavingAccount
+    def get_list_sa(self):
+        return self.list_saving_account
 
 class manage_checking_accounts:
-    listCheckingAccount = []
+    list_checking_account = []
 
-    def addCheckingAccount(self, id):
-        Cid = id
-        nameCustomer = customer_manage().findByID(id).name
-        accountNumber = input("Enter account number: ")
+    def add_checking_account(self, id):
+        customer_id = id
+        name_customer = customer_manage().find_by_id(id).name
+        account_number = input("Enter account number: ")
         balance = int(input("Enter balance : "))
-        linkcode = input("Enter account link code: ")
-        ca = Checking_Account(Cid, nameCustomer, accountNumber, balance, linkcode)
-        self.listCheckingAccount.append(ca)
+        link_code = input("Enter account link code: ")
+        ca = checking_account(customer_id, name_customer, account_number, balance, link_code)
+        self.list_checking_account.append(ca)
 
 
-    def findByID(self, id):
-        listCA = []
-        for ca in self.listCheckingAccount:
+    def find_by_id(self, id):
+        list_ca = []
+        for ca in self.list_checking_account:
             if (ca.id == id):
-                listCA.append(ca)
-        return listCA
+                list_ca.append(ca)
+        return list_ca
 
-    def showSavingAccount(self, listCA):
+    def show_saving_account(self, list_ca):
         print("{:<15} {:<20} {:<15} {:<15} {:<15}".format("Customer Id","Name", "Account Number", "Balance", "Link Code"))
-        for i in listCA:
-            print("{:<20} {:<15} {:<15} {:<15} ".format(i.id, i.name, i.account_number, i.balance, i.linkcode))
+        for i in list_ca:
+            print("{:<20} {:<15} {:<15} {:<15} ".format(i.id, i.name, i.account_number, i.balance, i.link_code))
         print("\n")
 
-    def getListCA(self):
-        return self.listCheckingAccount
+    def get_list_ca(self):
+        return self.list_checking_account

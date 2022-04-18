@@ -1,11 +1,11 @@
 create database Bank;
 
-use Bank;
+use Bank
 
 CREATE TABLE account_bank(
-	id int PRIMARY KEY NOT NULL auto_increment,
-	name varchar(100) NOT NULL,
-	acc_no varchar(50) NOT NULL,
+	id int PRIMARY KEY NOT NULL IDENTITY(1,1),
+	name nvarchar(50) NOT NULL,
+	acc_no nvarchar(50) NOT NULL,
 	balance int NOT NULL
 );
 
